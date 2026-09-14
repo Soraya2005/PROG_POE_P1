@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 public class LoginTest {
 
     // Test user (5 parameters, POE data)
-    Login user = new Login("aya_1", "Ch&&sec@ke99!", "+27838968976", "Soraya", "Pechera");
+    Login user = new Login("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
 
     // ===== checkUserName tests =====
     @Test
     void testValidUsername() {
-        assertTrue(user.checkUserName("aya_1"));
+        assertTrue(user.checkUserName("kyl_1"));
     }
 
     @Test
     void testInvalidUsername() {
-        assertFalse(user.checkUserName("soraya!!!!!!!"));
+        assertFalse(user.checkUserName("Kyle!!!!!!!"));
     }
 
     // ===== checkPasswordComplexity tests =====
@@ -47,7 +47,7 @@ public class LoginTest {
     // ===== loginUser tests =====
     @Test
     void testSuccessfulLogin() {
-        assertTrue(user.loginUser("aya_1", "Ch&&sec@ke99!"));
+        assertTrue(user.loginUser("kyl_1", "Ch&&sec@ke99!"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class LoginTest {
     @Test
     void testReturnLoginStatusSuccess() {
         assertEquals(
-            "Welcome Soraya, Pechera it is great to see you again.",
+            "Welcome Kyle, Smith it is great to see you again.",
             user.returnLoginStatus(true)
         );
     }
