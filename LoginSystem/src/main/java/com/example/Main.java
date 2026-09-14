@@ -10,12 +10,14 @@ public class Main {
 
         System.out.println("=== Registration ===");
 
+        // Ask for first and last name (needed for the welcome message)
         System.out.print("Enter first name: ");
         String firstName = scanner.nextLine();
 
         System.out.print("Enter last name: ");
         String lastName = scanner.nextLine();
 
+        // Ask for login information
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
 
@@ -25,14 +27,20 @@ public class Main {
         System.out.print("Enter cell phone number: ");
         String phone = scanner.nextLine();
 
-        Login user = new Login(username, password, phone);
-        user.setName(firstName, lastName);
+        // Create the user with the 5-parameter constructor
+        Login user = new Login(username, password, phone, firstName, lastName);
 
+        // Attempt registration
         String registrationMessage = user.registerUser();
-
         System.out.println(registrationMessage);
 
-        if (registrationMessage.equals("User successfully registered.")) {
+        // Exact success message 
+        String successMessage = "Username successfully captured.\n"
+                              + "Password successfully captured.\n"
+                              + "Cell number successfully added.";
+
+        // If registration succeeded, move on to login
+        if (registrationMessage.equals(successMessage)) {
 
             System.out.println("\n=== Login ===");
 
