@@ -8,118 +8,78 @@ import org.junit.jupiter.api.Test;
 
 public class LoginTest {
 
+    // Test user (5 parameters, POE data)
+    Login user = new Login("aya_1", "Ch&&sec@ke99!", "+27838968976", "Soraya", "Pechera");
+
+    // ===== checkUserName tests =====
     @Test
     void testValidUsername() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
-        assertTrue(login.checkUserName());
+        assertTrue(user.checkUserName("aya_1"));
     }
 
     @Test
     void testInvalidUsername() {
-
-        Login login = new Login(
-                "kyle!!!!!!!",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
-        assertFalse(login.checkUserName());
+        assertFalse(user.checkUserName("soraya!!!!!!!"));
     }
 
+    // ===== checkPasswordComplexity tests =====
     @Test
     void testValidPassword() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
-        assertTrue(login.checkPasswordComplexity());
+        assertTrue(user.checkPasswordComplexity("Ch&&sec@ke99!"));
     }
 
     @Test
     void testInvalidPassword() {
-
-        Login login = new Login(
-                "kyl_1",
-                "password",
-                "+27838968976"
-        );
-
-        assertFalse(login.checkPasswordComplexity());
+        assertFalse(user.checkPasswordComplexity("password"));
     }
 
+    // ===== checkCellPhoneNumber tests =====
     @Test
     void testValidCellPhoneNumber() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
-        assertTrue(login.checkCellPhoneNumber());
+        assertTrue(user.checkCellPhoneNumber("+27838968976"));
     }
 
     @Test
     void testInvalidCellPhoneNumber() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "08966553"
-        );
-
-        assertFalse(login.checkCellPhoneNumber());
+        assertFalse(user.checkCellPhoneNumber("08966553"));
     }
 
+    // ===== loginUser tests =====
     @Test
     void testSuccessfulLogin() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
-        assertTrue(
-                login.loginUser("kyl_1", "Ch&&sec@ke99!")
-        );
+        assertTrue(user.loginUser("aya_1", "Ch&&sec@ke99!"));
     }
 
     @Test
     void testFailedLogin() {
+        assertFalse(user.loginUser("wrong", "wrong"));
+    }
 
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
+    // ===== registerUser test  =====
+    @Test
+    void testRegistrationSuccessMessage() {
+        assertEquals(
+            "Username successfully captured.\n"
+          + "Password successfully captured.\n"
+          + "Cell number successfully added.",
+            user.registerUser()
         );
+    }
 
-        assertFalse(
-                login.loginUser("wrong", "wrong")
+    // ===== returnLoginStatus tests  =====
+    @Test
+    void testReturnLoginStatusSuccess() {
+        assertEquals(
+            "Welcome Soraya, Pechera it is great to see you again.",
+            user.returnLoginStatus(true)
         );
     }
 
     @Test
-    void testRegistrationSuccessMessage() {
-
-        Login login = new Login(
-                "kyl_1",
-                "Ch&&sec@ke99!",
-                "+27838968976"
-        );
-
+    void testReturnLoginStatusFail() {
         assertEquals(
-                "User successfully registered.",
-                login.registerUser()
+            "Username or password incorrect, please try again.",
+            user.returnLoginStatus(false)
         );
     }
 }
