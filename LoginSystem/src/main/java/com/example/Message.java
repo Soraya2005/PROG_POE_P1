@@ -33,7 +33,9 @@ public class Message {
 
     // Checks the recipient cell number
     public String checkRecipientCell() {
-        if (recipient.matches("^\\+[0-9]{1,10}$") && recipient.length() <= 13) {
+        // CORRECTION : La regex accepte un "+" suivi de 1 à 12 chiffres.
+        // Cela valide le numéro de test "+27718693002" et rejette "08575975889" (qui n'a pas de "+").
+        if (recipient.matches("^\\+[0-9]{1,12}$")) {
             return "Cell phone number successfully captured.";
         } else {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
