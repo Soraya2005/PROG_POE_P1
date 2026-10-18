@@ -19,11 +19,19 @@
 
     <dependencies>
 
+        <!-- JUnit 5 (Part 1) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.13.4</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- JSON (Part 2)  -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
         </dependency>
 
     </dependencies>
