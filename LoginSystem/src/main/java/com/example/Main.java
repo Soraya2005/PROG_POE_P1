@@ -136,6 +136,8 @@ public class Main {
 
                         default:
                             System.out.println("Invalid option.");
+
+                            // Force GitHub Action
                     }
                 }
             }
