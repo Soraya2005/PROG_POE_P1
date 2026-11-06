@@ -91,4 +91,11 @@ public class Message {
     public String getMessageText() {
         return message;
     }
+
+    // Returns the message text
+
+    public String getMessageTextForTest() {
+        return this.message;
+    }
+
 }

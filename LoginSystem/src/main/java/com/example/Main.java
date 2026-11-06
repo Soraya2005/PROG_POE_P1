@@ -35,7 +35,6 @@ public class Main {
                               + "Cell number successfully added.";
 
         if (registrationMessage.equals(successMessage)) {
-
             System.out.println("\n=== Login ===");
 
             System.out.print("Enter username: ");
@@ -47,15 +46,14 @@ public class Main {
             boolean loginSuccessful = user.loginUser(loginUsername, loginPassword);
             System.out.println(user.returnLoginStatus(loginSuccessful));
 
-            // === QuickChat starts here ===
             if (loginSuccessful) {
                 System.out.println("\nWelcome to QuickChat.");
+                
+                // Charger les anciens messages stockés au démarrage
+                MessageArrayManager.loadMessagesFromJson();
 
-                // Ask how many messages the user wants to send
                 System.out.print("How many messages do you wish to enter? ");
                 int numMessages = Integer.parseInt(scanner.nextLine());
-
-                MessageManager manager = new MessageManager();
                 int messagesProcessed = 0;
 
                 boolean running = true;
@@ -64,57 +62,53 @@ public class Main {
                     System.out.println("1) Send Messages");
                     System.out.println("2) Show recently sent messages");
                     System.out.println("3) Quit");
+                    System.out.println("4) Stored Messages"); // NOUVELLE OPTION
                     System.out.print("Choose an option: ");
-                    int choice = Integer.parseInt(scanner.nextLine());
+                    String choice = scanner.nextLine();
 
                     switch (choice) {
-                        case 1:
+                        case "1":
                             while (messagesProcessed < numMessages) {
-                                // Ask for recipient
                                 System.out.print("Enter recipient cell number: ");
                                 String recipient = scanner.nextLine();
 
-                                // Ask for message
                                 System.out.print("Enter message: ");
                                 String msgText = scanner.nextLine();
 
-                                // Check message length
                                 if (msgText.length() > 250) {
                                     System.out.println("Please enter a message of less than 250 characters.");
                                     continue;
                                 }
 
-                                // Create message
                                 Message m = new Message(recipient, msgText);
 
-                                // Check recipient format
                                 String recipientCheck = m.checkRecipientCell();
                                 if (!recipientCheck.equals("Cell phone number successfully captured.")) {
                                     System.out.println(recipientCheck);
                                     continue;
                                 }
 
-                                // Ask what to do
                                 System.out.println("1) Send Message");
                                 System.out.println("2) Disregard Message");
                                 System.out.println("3) Store Message to send later");
                                 System.out.print("Choose an option: ");
-                                int action = Integer.parseInt(scanner.nextLine());
+                                String action = scanner.nextLine();
 
                                 switch (action) {
-                                    case 1:
-                                        manager.addMessage(m);
+                                    case "1":
+                                        MessageArrayManager.addSentMessage(m);
                                         System.out.println("Message successfully sent.");
                                         System.out.println(m.printMessages());
                                         messagesProcessed++;
                                         break;
-                                    case 2:
+                                    case "2":
+                                        MessageArrayManager.addDisregardedMessage(m);
                                         System.out.println("Press 0 to delete the message.");
                                         scanner.nextLine();
+                                        messagesProcessed++;
                                         break;
-                                    case 3:
-                                        manager.addMessage(m);
-                                        manager.storeMessage();
+                                    case "3":
+                                        MessageArrayManager.addStoredMessage(m);
                                         System.out.println("Message successfully stored.");
                                         messagesProcessed++;
                                         break;
@@ -122,27 +116,27 @@ public class Main {
                                         System.out.println("Invalid option.");
                                 }
                             }
-                            System.out.println("Total messages sent: " + manager.returnTotalMessages());
                             break;
 
-                        case 2:
+                        case "2":
                             System.out.println("Coming Soon.");
                             break;
 
-                        case 3:
+                        case "3":
                             running = false;
                             System.out.println("Goodbye!");
+                            break;
+                            
+                        case "4": // LANCEMENT DU MENU STORED MESSAGES
+                            StoredMessagesMenu.showMenu(scanner);
                             break;
 
                         default:
                             System.out.println("Invalid option.");
-
-                            // Force GitHub Action
                     }
                 }
             }
         }
-
         scanner.close();
     }
 }

@@ -1,0 +1,14 @@
+[
+    {
+        "Message": "Hi Mike, can you join us for tonight?",
+        "Recipient": "+27718693002",
+        "MessageHash": "23:0:HITONIGHT?",
+        "MessageID": "2326544864"
+    },
+    {
+        "Message": " Hi Keegan, did you receive the payment?",
+        "Recipient": "+27718693002",
+        "MessageHash": "60:0:HIPAYMENT?",
+        "MessageID": "6068878004"
+    }
+]
