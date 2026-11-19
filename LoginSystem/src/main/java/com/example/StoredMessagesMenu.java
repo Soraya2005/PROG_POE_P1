@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class StoredMessagesMenu {
 
-    public static void showMenu(Scanner scanner) {
+    public static void showMenu(Scanner scanner, String senderName) {
         boolean back = false;
         
         while (!back) {
@@ -24,7 +24,7 @@ public class StoredMessagesMenu {
                 case "1":
                     for (int i = 0; i < MessageArrayManager.storedCount; i++) {
                         if (MessageArrayManager.storedMessages[i] != null) {
-                            System.out.println("Sender: Me | Recipient: " + MessageArrayManager.storedMessages[i].getRecipient());
+                            System.out.println("Sender: " + senderName + " | Recipient: " + MessageArrayManager.storedMessages[i].getRecipient());
                         }
                     }
                     break;

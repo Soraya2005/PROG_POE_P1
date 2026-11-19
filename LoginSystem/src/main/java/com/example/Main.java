@@ -48,8 +48,8 @@ public class Main {
 
             if (loginSuccessful) {
                 System.out.println("\nWelcome to QuickChat.");
-                
-                // Charger les anciens messages stockés au démarrage
+
+                // Update the previously stored messages at startup
                 MessageArrayManager.loadMessagesFromJson();
 
                 System.out.print("How many messages do you wish to enter? ");
@@ -62,12 +62,17 @@ public class Main {
                     System.out.println("1) Send Messages");
                     System.out.println("2) Show recently sent messages");
                     System.out.println("3) Quit");
-                    System.out.println("4) Stored Messages"); // NOUVELLE OPTION
+                    System.out.println("4) Stored Messages");
                     System.out.print("Choose an option: ");
                     String choice = scanner.nextLine();
 
                     switch (choice) {
                         case "1":
+                            if (messagesProcessed >= numMessages) {
+                                System.out.println("You have already entered all " + numMessages + " messages.");
+                                break;
+                            }
+
                             while (messagesProcessed < numMessages) {
                                 System.out.print("Enter recipient cell number: ");
                                 String recipient = scanner.nextLine();
@@ -96,6 +101,7 @@ public class Main {
 
                                 switch (action) {
                                     case "1":
+                                        m.setNumMessagesSent(MessageArrayManager.sentCount + 1);
                                         MessageArrayManager.addSentMessage(m);
                                         System.out.println("Message successfully sent.");
                                         System.out.println(m.printMessages());
@@ -126,9 +132,9 @@ public class Main {
                             running = false;
                             System.out.println("Goodbye!");
                             break;
-                            
-                        case "4": // LANCEMENT DU MENU STORED MESSAGES
-                            StoredMessagesMenu.showMenu(scanner);
+
+                        case "4":
+                            StoredMessagesMenu.showMenu(scanner, firstName + " " + lastName);
                             break;
 
                         default:
