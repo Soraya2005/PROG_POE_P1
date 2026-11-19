@@ -93,7 +93,7 @@ public class StoredMessagesMenu {
         for (int i = 0; i < MessageArrayManager.storedCount; i++) {
             if (MessageArrayManager.storedMessages[i] != null && MessageArrayManager.storedMessages[i].getMessageHash().equals(hash)) {
                 String deletedText = MessageArrayManager.storedMessages[i].getMessageText();
-                // On décale tout le tableau pour supprimer l'élément
+                //  Move the entire table over to remove the item
                 for (int j = i; j < MessageArrayManager.storedCount - 1; j++) {
                     MessageArrayManager.storedMessages[j] = MessageArrayManager.storedMessages[j + 1];
                 }
