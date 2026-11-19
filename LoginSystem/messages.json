@@ -2,13 +2,13 @@
     {
         "Message": "Where are you? You are late! I have asked you to be on time.",
         "Recipient": "+27838884567",
-        "MessageHash": "73:0:WHERETIME.",
-        "MessageID": "7319431711"
+        "MessageHash": "42:0:WHERETIME.",
+        "MessageID": "4264530020"
     },
     {
         "Message": "Ok, I am leaving without you.",
         "Recipient": "+27838884567",
-        "MessageHash": "15:0:OK,YOU.",
-        "MessageID": "1576465981"
+        "MessageHash": "98:0:OK,YOU.",
+        "MessageID": "9879792662"
     }
 ]
